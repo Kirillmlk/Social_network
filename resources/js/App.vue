@@ -25,7 +25,7 @@ export default {
 
         logout() {
             axios.post('/logout')
-                .then( res => {
+                .then(res => {
                     localStorage.removeItem('x_xsrf_token')
                     this.$router.push({name: 'user.login'})
                 })
@@ -35,15 +35,15 @@ export default {
 </script>
 
 <template>
-        <div>
-            <h1 class="text-3xl font-bold ">
-                Hello world!
-            </h1>
+    <div class="w-96 mx-auto">
+        <div class="flex justify-between p-8 w-86 mx-auto">
             <router-link v-if="!token" :to="{ name: 'user.login'}">Login</router-link>
             <router-link v-if="token" :to="{ name: 'user.personal'}">Personal</router-link>
             <router-link v-if="!token" :to="{ name: 'user.registration'}">Registration</router-link>
-            <router-view></router-view>
+            <a href="#" v-if="token" @click.prevent="logout">Logout</a>
         </div>
+        <router-view></router-view>
+    </div>
 </template>
 
 <style scoped>
