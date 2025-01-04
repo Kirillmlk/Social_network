@@ -1,6 +1,16 @@
 <template>
     <div class="w-96 mx-auto">
-        personal
+        <div>
+            <div>
+            <input v-model="title" type="text" placeholder="title" class="mb-3 w-96 rounded-3xl border p-2 border-slate-300">
+            </div>
+            <div>
+                <textarea v-model="content" placeholder="content" class="w-96 mb-3 rounded-3xl border p-2 border-slate-300"></textarea>
+            </div>
+            <div>
+                <a href="#" class="block p-2 w-32 bg-green-600 rounded-3xl text-center text-white hover:bg-white hover:border hover:border-green-600 hover:text-green-600">Publish</a>
+            </div>
+        </div>
 <!--        <Stat :stats="stats"></Stat>-->
 <!--        <div class="mb-4">-->
 <!--            <div class=" mb-3">-->
