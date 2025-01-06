@@ -2,54 +2,71 @@
     <div class="w-96 mx-auto">
         <div>
             <div>
-            <input v-model="title" type="text" placeholder="title" class="mb-3 w-96 rounded-3xl border p-2 border-slate-300">
+                <input v-model="title" type="text" placeholder="title"
+                       class="mb-3 w-96 rounded-3xl border p-2 border-slate-300">
             </div>
             <div>
-                <textarea v-model="content" placeholder="content" class="w-96 mb-3 rounded-3xl border p-2 border-slate-300"></textarea>
+                <textarea v-model="content" placeholder="content"
+                          class="w-96 mb-3 rounded-3xl border p-2 border-slate-300"></textarea>
+            </div>
+            <div class="flex mb-3 items-center">
+                <div>
+                    <input @change="storeImage" ref="file" type="file" class="hidden">
+                    <a href="#" class="block p-2 w-16 text-center text-sm rounded-3xl bg-sky-500 text-white"
+                       @click.prevent="selectFile()">Image</a>
+                </div>
+                <div>
+                    <a @click.prevent="image = null" href="#" class="ml-2">Cancel</a>
+                </div>
+            </div>
+            <div v-if="image" >
+                <img :src="image.url" alt="preview">
             </div>
             <div>
-                <a href="#" class="block p-2 w-32 bg-green-600 rounded-3xl text-center text-white hover:bg-white hover:border hover:border-green-600 hover:text-green-600">Publish</a>
+                <a href="#"
+                   class="block p-2 w-32 bg-green-600 rounded-3xl text-center text-white hover:bg-white hover:border
+                   hover:border-green-600 hover:text-green-600 ml-auto">Publish</a>
             </div>
         </div>
-<!--        <Stat :stats="stats"></Stat>-->
-<!--        <div class="mb-4">-->
-<!--            <div class=" mb-3">-->
-<!--                <input v-model="title" class="w-96 rounded-3xl border p-2 border-slate-300" type="text"-->
-<!--                       placeholder="title">-->
-<!--                <div v-if="errors.title">-->
-<!--                    <p v-for="error in errors.title" class="text-sm mt-2 text-red-500">{{ error }}</p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class=" mb-3">-->
-<!--                <textarea v-model="content" class="w-96 rounded-3xl border p-2 border-slate-300"-->
-<!--                          placeholder="content"></textarea>-->
-<!--                <div v-if="errors.content">-->
-<!--                    <p v-for="error in errors.content" class="text-sm mb-2 text-red-500">{{ error }}</p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="flex mb-3 items-center">-->
-<!--                <div>-->
-<!--                    <input @change="storeImage" ref="file" type="file" class="hidden">-->
-<!--                    <a href="#" class="block p-2 w-16 text-center text-sm rounded-3xl bg-sky-500 text-white"-->
-<!--                       @click.prevent="selectFile()">Image</a>-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                    <a v-if="image" @click.prevent="image = null" class="ml-3" href="#">Cancel</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div v-if="image">-->
-<!--                <img :src="image.url" alt="preview">-->
-<!--            </div>-->
-<!--            <div>-->
-<!--                <a @click.prevent="store" href="#" class="block p-2 w-32 text-center rounded-3xl bg-green-600 text-white-->
-<!--                hover:bg-white hover:border hover:border-green-600 hover:text-green-600 box-border ml-auto">Publish</a>-->
-<!--            </div>-->
-<!--        </div>-->
+        <!--        <Stat :stats="stats"></Stat>-->
+        <!--        <div class="mb-4">-->
+        <!--            <div class=" mb-3">-->
+        <!--                <input v-model="title" class="w-96 rounded-3xl border p-2 border-slate-300" type="text"-->
+        <!--                       placeholder="title">-->
+        <!--                <div v-if="errors.title">-->
+        <!--                    <p v-for="error in errors.title" class="text-sm mt-2 text-red-500">{{ error }}</p>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--            <div class=" mb-3">-->
+        <!--                <textarea v-model="content" class="w-96 rounded-3xl border p-2 border-slate-300"-->
+        <!--                          placeholder="content"></textarea>-->
+        <!--                <div v-if="errors.content">-->
+        <!--                    <p v-for="error in errors.content" class="text-sm mb-2 text-red-500">{{ error }}</p>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--            <div class="flex mb-3 items-center">-->
+        <!--                <div>-->
+        <!--                    <input @change="storeImage" ref="file" type="file" class="hidden">-->
+        <!--                    <a href="#" class="block p-2 w-16 text-center text-sm rounded-3xl bg-sky-500 text-white"-->
+        <!--                       @click.prevent="selectFile()">Image</a>-->
+        <!--                </div>-->
+        <!--                <div>-->
+        <!--                    <a v-if="image" @click.prevent="image = null" class="ml-3" href="#">Cancel</a>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--            <div v-if="image">-->
+        <!--                <img :src="image.url" alt="preview">-->
+        <!--            </div>-->
+        <!--            <div>-->
+        <!--                <a @click.prevent="store" href="#" class="block p-2 w-32 text-center rounded-3xl bg-green-600 text-white-->
+        <!--                hover:bg-white hover:border hover:border-green-600 hover:text-green-600 box-border ml-auto">Publish</a>-->
+        <!--            </div>-->
+        <!--        </div>-->
 
-<!--        <div v-if="posts">-->
-<!--            <h1 class="mb-8 pb-8 border-b border-gray-400">Posts</h1>-->
-<!--&lt;!&ndash;            <Post v-for="post in posts" :post="post"></Post>&ndash;&gt;-->
-<!--        </div>-->
+        <!--        <div v-if="posts">-->
+        <!--            <h1 class="mb-8 pb-8 border-b border-gray-400">Posts</h1>-->
+        <!--&lt;!&ndash;            <Post v-for="post in posts" :post="post"></Post>&ndash;&gt;-->
+        <!--        </div>-->
 
     </div>
 </template>
@@ -71,10 +88,7 @@ export default {
         }
     },
 
-    components: {
-
-
-    },
+    components: {},
 
     mounted() {
         // this.getPosts()
@@ -106,9 +120,9 @@ export default {
                     this.image = null
                     this.posts.unshift(res.data.data)
                 })
-            .catch( e => {
-                this.errors = e.response.data.errors
-            })
+                .catch(e => {
+                    this.errors = e.response.data.errors
+                })
         },
         selectFile() {
             this.fileInput = this.$refs.file;
@@ -120,7 +134,7 @@ export default {
             const formData = new FormData()
             formData.append('image', file)
 
-            axios.post('/api/post_images', formData)
+            axios.post('/api/post_image', formData)
                 .then(res => {
                     this.image = res.data.data
                 })
