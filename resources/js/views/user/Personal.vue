@@ -23,11 +23,14 @@
                 <img :src="image.url" alt="preview">
             </div>
             <div>
-                <a href="#"
+                <a @click.prevent="store" href="#"
                    class="block p-2 w-32 bg-green-600 rounded-3xl text-center text-white hover:bg-white hover:border
                    hover:border-green-600 hover:text-green-600 ml-auto">Publish</a>
             </div>
         </div>
+
+
+
         <!--        <Stat :stats="stats"></Stat>-->
         <!--        <div class="mb-4">-->
         <!--            <div class=" mb-3">-->
@@ -134,7 +137,7 @@ export default {
             const formData = new FormData()
             formData.append('image', file)
 
-            axios.post('/api/post_image', formData)
+            axios.post('/api/post_images', formData)
                 .then(res => {
                     this.image = res.data.data
                 })
