@@ -22,9 +22,11 @@ class PostController extends Controller
             unset($data['image_id']);
 
             $data['user_id'] = auth()->id();
-
             $post = Post::create($data);
+
             $this->processImage($post, $imageId);
+
+            PostImage::clearStorage();
 
             DB::commit();
         } catch (\Exception $exception) {
