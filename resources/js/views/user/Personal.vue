@@ -1,6 +1,6 @@
 <template>
     <div class="w-96 mx-auto">
-        <div>
+        <div class="mb-4">
             <div>
                 <input v-model="title" type="text" placeholder="title"
                        class="mb-3 w-96 rounded-3xl border p-2 border-slate-300">
@@ -19,7 +19,7 @@
                     <a @click.prevent="image = null" href="#" class="ml-2">Cancel</a>
                 </div>
             </div>
-            <div v-if="image" >
+            <div v-if="image">
                 <img :src="image.url" alt="preview">
             </div>
             <div>
@@ -29,6 +29,15 @@
             </div>
         </div>
 
+        <div v-if="posts">
+            <h1 class="mb-4 pb-8 text-center">Posts</h1>
+            <div v-for="post in posts" class="mb-6 pb-6 border-b border-black text-center">
+                <h1 class="text-xl">{{ post.title }}</h1>
+                <img v-if="post.image_url" class="my-3 mx-auto" :src="post.image_url" :alt="post.title"/>
+                <p>{{ post.content }}</p>
+                <p class="ml-auto mt-2 text-slate-500 text-right">{{ post.date }}</p>
+            </div>
+        </div>
 
 
         <!--        <Stat :stats="stats"></Stat>-->
@@ -94,7 +103,7 @@ export default {
     components: {},
 
     mounted() {
-        // this.getPosts()
+        this.getPosts()
         // this.getStats()
     },
 
